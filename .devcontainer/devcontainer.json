@@ -1,6 +1,6 @@
 {
-  "name": "ai-new-workflow-app-template",
-  "image": "ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest",
+  "name": "gap-miner-v2-delta48",
+  "image": "ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest",
   "containerEnv": {
     "DOTNET_ROOT": "/usr/share/dotnet"
   },

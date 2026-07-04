@@ -327,7 +327,7 @@ For a shared experience across opencode + VS Code on the same machine, point bot
 
 ### Devcontainer Image
 
-The devcontainer already has `uv` installed. `uvx mcp-memory-service` will download on first use. **No Dockerfile changes needed** (the Dockerfile lives in the external `intel-agency/workflow-orchestration-prebuild` repo).
+The devcontainer already has `uv` installed. `uvx mcp-memory-service` will download on first use. **No Dockerfile changes needed** (the Dockerfile lives in the external `nam20485/workflow-orchestration-prebuild` repo).
 
 However: first run downloads ONNX model (~200MB). For CI stability, consider:
 - **Option A:** Accept cold-start cost (one-time per workflow run, cached by uv)
@@ -453,7 +453,7 @@ The migration is fully reversible in a single git revert.
 
 `mcp-memory-service` uses `sentence-transformers` for semantic search, which pulls in the full PyTorch + ONNX + CUDA stack at runtime via `uvx`. On a cold devcontainer (no uv package cache), the first invocation downloads **~2.5GB** of packages before the MCP server can respond. This was observed in production:
 
-- **Evidence:** Forensic analysis of run `intel-agency/convo-content-buddy-bravo61` workflow run `#23929140287`
+- **Evidence:** Forensic analysis of run `nam20485/convo-content-buddy-bravo61` workflow run `#23929140287`
 - **Symptom:** 43-minute gap in all log output between 01:04:48 UTC and 01:47:46 UTC — the orchestrator was stuck waiting for `mcp-memory-service` to initialize
 - **Result:** Watchdog killed the process at 01:47:46 (SIGTERM, exit 143, `IDLE_TIMEOUT_SECS=900`)
 - **Zero useful work completed** — the entire workflow run failed before the orchestrator wrote a single line of output

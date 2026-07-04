@@ -139,7 +139,7 @@ tar xzf ./actions-runner-linux-x64.tar.gz
 
 # Configure — token is generated at:
 # Repo → Settings → Actions → Runners → New self-hosted runner
-./config.sh --url https://github.com/intel-agency/workflow-orchestration \
+./config.sh --url https://github.com/nam20485/workflow-orchestration \
             --token <YOUR_TOKEN> \
             --labels self-hosted,local
 ```

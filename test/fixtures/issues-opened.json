@@ -9,14 +9,14 @@
     "labels": [],
     "assignees": [],
     "milestone": null,
-    "html_url": "https://github.com/intel-agency/workflow-orchestration/issues/42",
+    "html_url": "https://github.com/nam20485/workflow-orchestration/issues/42",
     "created_at": "2026-02-17T00:00:00Z",
     "updated_at": "2026-02-17T00:00:00Z"
   },
   "repository": {
-    "full_name": "intel-agency/workflow-orchestration",
+    "full_name": "nam20485/workflow-orchestration",
     "name": "workflow-orchestration",
-    "owner": { "login": "intel-agency" }
+    "owner": { "login": "nam20485" }
   },
   "sender": { "login": "nam20485" }
 }

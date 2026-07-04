@@ -10,7 +10,7 @@
     "diff_hunk": "@@ -15,4 +15,6 @@ ENV PATH=\"${PATH}:${DOTNET_ROOT}:${DOTNET_ROOT}/tools\"\n \n # .NET Aspire workload + Avalonia templates\n RUN dotnet workload install aspire \\\n-    && dotnet new install Avalonia.Templates",
     "commit_id": "abc123def456",
     "pull_request_review_id": 300,
-    "html_url": "https://github.com/intel-agency/workflow-orchestration/pull/1#discussion_r400",
+    "html_url": "https://github.com/nam20485/workflow-orchestration/pull/1#discussion_r400",
     "created_at": "2026-02-17T03:30:00Z"
   },
   "pull_request": {
@@ -26,12 +26,12 @@
       "sha": "def456abc789"
     },
     "user": { "login": "nam20485" },
-    "html_url": "https://github.com/intel-agency/workflow-orchestration/pull/1"
+    "html_url": "https://github.com/nam20485/workflow-orchestration/pull/1"
   },
   "repository": {
-    "full_name": "intel-agency/workflow-orchestration",
+    "full_name": "nam20485/workflow-orchestration",
     "name": "workflow-orchestration",
-    "owner": { "login": "intel-agency" }
+    "owner": { "login": "nam20485" }
   },
   "sender": { "login": "reviewer" }
 }

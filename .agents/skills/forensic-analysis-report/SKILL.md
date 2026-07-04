@@ -234,9 +234,9 @@ Always consult the exemplar before writing the final markdown document if the us
 
 ## Example Prompts
 
-- `/forensic-analysis-report repo=intel-agency/workflow-orchestration-queue-delta61 content=workflow`
-- `/forensic-analysis-report repo=intel-agency/ai-new-workflow-app-template content=repo`
-- `/forensic-analysis-report repo=intel-agency/workflow-orchestration-queue-kilo57 content="workflow run"`
+- `/forensic-analysis-report repo=nam20485/workflow-orchestration-queue-delta61 content=workflow`
+- `/forensic-analysis-report repo=nam20485/gap-miner-v2-delta48 content=repo`
+- `/forensic-analysis-report repo=nam20485/workflow-orchestration-queue-kilo57 content="workflow run"`
 - `Investigate whether the last few failures in this workflow are all the same class of timeout and write a forensic report`
 
 ## Notes

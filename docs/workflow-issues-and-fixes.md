@@ -2,8 +2,8 @@
 
 > **Sources analyzed:**
 >
-> - [yankee89-b repo](https://github.com/intel-agency/workflow-orchestration-queue-yankee89-b) — actions, issues, labels, projects, pull requests
-> - [foxtrot54 PR #1](https://github.com/intel-agency/workflow-orchestration-queue-foxtrot54/pull/1) — all review comments (Codex + Gemini)
+> - [yankee89-b repo](https://github.com/nam20485/workflow-orchestration-queue-yankee89-b) — actions, issues, labels, projects, pull requests
+> - [foxtrot54 PR #1](https://github.com/nam20485/workflow-orchestration-queue-foxtrot54/pull/1) — all review comments (Codex + Gemini)
 > - Local template files: `.github/.labels.json`, `orchestrator-agent.yml`, `orchestrator-agent-prompt.md`, `import-labels.ps1`, `ai-dynamic-workflows.md`
 >
 > **Date:** 2026-03-21
@@ -405,7 +405,7 @@ Per Codex review: Console script entry points must be synchronous functions. The
 
 **Status:** Open
 
-**Forensic Source:** `intel-agency/workflow-orchestration-queue-india87` — workflow run [23815130143](https://github.com/intel-agency/workflow-orchestration-queue-india87/actions/runs/23815130143) (27m58s, reported "succeeded")
+**Forensic Source:** `nam20485/workflow-orchestration-queue-india87` — workflow run [23815130143](https://github.com/nam20485/workflow-orchestration-queue-india87/actions/runs/23815130143) (27m58s, reported "succeeded")
 
 **Regression Commit:** `d4b5f28` — "docs: add note to skip PR review for already-merged bootstrap PRs in epic workflow" (2026-03-29)
 
@@ -449,7 +449,7 @@ A 6-line NOTE was added to the `orchestration:epic-implemented` clause advising 
 
 **Status:** Open (external dependency)
 
-**Forensic Source:** `intel-agency/workflow-orchestration-queue-india87` — workflow run [23815130143](https://github.com/intel-agency/workflow-orchestration-queue-india87/actions/runs/23815130143)
+**Forensic Source:** `nam20485/workflow-orchestration-queue-india87` — workflow run [23815130143](https://github.com/nam20485/workflow-orchestration-queue-india87/actions/runs/23815130143)
 
 **Location:** External — ZhipuAI API (`api.z.ai`)
 

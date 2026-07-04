@@ -13,7 +13,7 @@ Enable running the full opencode server + devcontainer orchestration stack **loc
 | Component | Path | Status |
 |-----------|------|--------|
 | Consumer devcontainer config | `.devcontainer/devcontainer.json` | ✅ Pulls prebuild GHCR image, forwards port 4096, auto-starts opencode server via `postStartCommand` |
-| Prebuild image | `ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest` | ✅ Published, contains .NET SDK 10, Bun, uv, opencode CLI, MCP servers |
+| Prebuild image | `ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest` | ✅ Published, contains .NET SDK 10, Bun, uv, opencode CLI, MCP servers |
 | Port forwarding | Port `4096` | ✅ Configured in `devcontainer.json` `forwardPorts` |
 | Remote env passthrough | API keys, tokens | ✅ `remoteEnv` maps `localEnv:*` vars into the container |
 
@@ -312,7 +312,7 @@ done
 
 - Create `docker-compose.yml` at repo root:
   - Service: `opencode-server`
-  - Image: `ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest`
+  - Image: `ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest`
   - Ports: `4096:4096`
   - Volumes: workspace bind mount, `.env` file, `.memory/` persistence
   - `command: bash ./scripts/start-opencode-server.sh`

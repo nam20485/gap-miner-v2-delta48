@@ -216,9 +216,9 @@ With the YAML filter fix (Issue A), `implementation:ready` won't match the `orch
 
 | File | Repo | Issues Addressed | Status |
 |---|---|---|---|
-| `.github/workflows/orchestrator-agent.yml` | `ai-new-workflow-app-template` | A, D | **DONE** |
-| `.github/workflows/prompts/orchestrator-agent-prompt.md` | `ai-new-workflow-app-template` | B, D | **DONE** |
-| `.github/.labels.json` | `ai-new-workflow-app-template` | C, D, L | **DONE** |
+| `.github/workflows/orchestrator-agent.yml` | `gap-miner-v2-delta48` | A, D | **DONE** |
+| `.github/workflows/prompts/orchestrator-agent-prompt.md` | `gap-miner-v2-delta48` | B, D | **DONE** |
+| `.github/.labels.json` | `gap-miner-v2-delta48` | C, D, L | **DONE** |
 | `scripts/trigger-project-setup.ps1` | `workflow-launch2` | D | **DONE** |
 | `ai_instruction_modules/ai-workflow-assignments/dynamic-workflows/project-setup.md` | `agent-instructions` | E | **DONE** |
 | `ai_instruction_modules/ai-workflow-assignments/create-app-plan.md` | `agent-instructions` | F | **DONE** |

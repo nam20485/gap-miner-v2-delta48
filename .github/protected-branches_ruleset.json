@@ -3,7 +3,7 @@
   "name": "protected-branches",
   "target": "branch",
   "source_type": "Repository",
-  "source": "intel-agency/workflow-orchestration-queue-zulu78-b",
+  "source": "nam20485/workflow-orchestration-queue-zulu78-b",
   "enforcement": "active",
   "conditions": {
     "ref_name": {

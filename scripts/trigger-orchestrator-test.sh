@@ -5,7 +5,7 @@ export GH_PAGER=cat
 # Trigger the orchestrator-agent workflow by creating a dispatch issue.
 # Usage: ./scripts/trigger-orchestrator-test.sh [repo]
 
-REPO="${1:-intel-agency/workflow-orchestration-queue-uniform39}"
+REPO="${1:-nam20485/workflow-orchestration-queue-uniform39}"
 
 TITLE="orchestrate-dynamic-workflow"
 BODY='/orchestrate-dynamic-workflow

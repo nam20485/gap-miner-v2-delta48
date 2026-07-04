@@ -26,8 +26,8 @@ npm install -g @devcontainers/cli
 ### 2a. Clone the repo (if you haven't already)
 
 ```bash
-git clone https://github.com/intel-agency/ai-new-workflow-app-template.git
-cd ai-new-workflow-app-template
+git clone https://github.com/nam20485/gap-miner-v2-delta48.git
+cd gap-miner-v2-delta48
 ```
 
 ### 2b. Configure environment variables
@@ -205,7 +205,7 @@ The prebuild GHCR image must be accessible. Ensure you've logged into GHCR:
 
 ```bash
 bash scripts/setup-local-env.sh --ghcr-login
-docker pull ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest
+docker pull ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest
 ```
 
 ### "opencode is not installed or not on PATH"
@@ -213,7 +213,7 @@ docker pull ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:ma
 This means the devcontainer image doesn't have opencode. Verify the image:
 
 ```bash
-docker run --rm ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest which opencode
+docker run --rm ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest which opencode
 ```
 
 ### "GH_ORCHESTRATION_AGENT_TOKEN is not set"

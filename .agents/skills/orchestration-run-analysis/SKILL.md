@@ -28,7 +28,7 @@ metadata:
 
 Use this skill when:
 
-- A deployed template repository (generated from `ai-new-workflow-app-template`) has completed one or more orchestrator runs and you need to understand what happened
+- A deployed template repository (generated from `gap-miner-v2-delta48`) has completed one or more orchestrator runs and you need to understand what happened
 - An orchestration sequence stalled or produced fewer issues/PRs/epics than expected
 - You need a formal post-mortem of a workflow run for debugging or documentation
 - Comparing expected orchestrator behavior against actual event data
@@ -41,7 +41,7 @@ Ask clarifying questions if the target repository URL or the specific runs to in
 
 Collect from the user:
 
-- **Repository**: The full `owner/repo` slug (e.g. `intel-agency/workflow-orchestration-queue-zulu78-b`)
+- **Repository**: The full `owner/repo` slug (e.g. `nam20485/workflow-orchestration-queue-zulu78-b`)
 - **Time range** (optional): Which runs to focus on (default: all runs)
 - **Specific concern** (optional): "Why didn't epics get created?", "Why did it stall?", etc.
 

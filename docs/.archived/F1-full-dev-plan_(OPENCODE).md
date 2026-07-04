@@ -1,7 +1,7 @@
 # F1: Orchestration Migration to Prebuild Container — Full Development Plan
 
 > **Status:** Planning  
-> **Feature:** F1 — Move all orchestration-related code to the `intel-agency/workflow-orchestration-prebuild` prebuild container  
+> **Feature:** F1 — Move all orchestration-related code to the `nam20485/workflow-orchestration-prebuild` prebuild container  
 > **Last Updated:** 2026-03-27  
 > **Related:** [new_features.md](new_features.md) § F1 | [F1-orchestration-migration-options.md](F1-orchestration-migration-options.md)
 
@@ -9,7 +9,7 @@
 
 ## 1. Overview
 
-This document defines the comprehensive development plan for Feature F1: migrating all orchestration-related code from the template repository (`intel-agency/ai-new-workflow-app-template`) to a dedicated prebuild container repository (`intel-agency/workflow-orchestration-prebuild`).
+This document defines the comprehensive development plan for Feature F1: migrating all orchestration-related code from the template repository (`nam20485/gap-miner-v2-delta48`) to a dedicated prebuild container repository (`nam20485/workflow-orchestration-prebuild`).
 
 ### Goal
 
@@ -98,7 +98,7 @@ When running inside the devcontainer via `devcontainers/ci`, stdout/stderr from 
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    TEMPLATE REPO (ai-new-workflow-app-template)             │
+│                    TEMPLATE REPO (gap-miner-v2-delta48)             │
 │                                                                             │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
 │  │ APPLICATION-LEVEL (stays)                                           │   │
@@ -130,7 +130,7 @@ When running inside the devcontainer via `devcontainers/ci`, stdout/stderr from 
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                    TEMPLATE REPO (ai-new-workflow-app-template)             │
+│                    TEMPLATE REPO (gap-miner-v2-delta48)             │
 │                                                                             │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
 │  │ APPLICATION-LEVEL ONLY                                              │   │
@@ -149,7 +149,7 @@ When running inside the devcontainer via `devcontainers/ci`, stdout/stderr from 
                                       │ references
                                       ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│              PREBUILD REPO (intel-agency/workflow-orchestration-prebuild)   │
+│              PREBUILD REPO (nam20485/workflow-orchestration-prebuild)   │
 │                                                                             │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
 │  │ DOCKER IMAGE (baked in)                                             │   │
@@ -193,7 +193,7 @@ steps:
   
   - checkout  # prebuild repo → .orchestration/
     with:
-      repository: intel-agency/workflow-orchestration-prebuild
+      repository: nam20485/workflow-orchestration-prebuild
       path: .orchestration
       
   - run: |
@@ -205,8 +205,8 @@ steps:
          
   - uses: devcontainers/ci@v0.3
     with:
-      imageName: ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer
-      cacheFrom: ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer
+      imageName: ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer
+      cacheFrom: ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer
       push: never
       runCmd: |
         bash /opt/orchestration/scripts/run-orchestrator.sh \
@@ -396,7 +396,7 @@ jobs:
       - name: Checkout orchestration config
         uses: actions/checkout@v4
         with:
-          repository: intel-agency/workflow-orchestration-prebuild
+          repository: nam20485/workflow-orchestration-prebuild
           path: .orchestration
           ref: main
 
@@ -423,8 +423,8 @@ jobs:
           KIMI_CODE_ORCHESTRATOR_AGENT_API_KEY: ${{ secrets.KIMI_CODE_ORCHESTRATOR_AGENT_API_KEY }}
         with:
           subFolder: "."
-          imageName: ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer
-          cacheFrom: ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer
+          imageName: ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer
+          cacheFrom: ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer
           push: never
           runCmd: |
             bash /opt/orchestration/scripts/run-orchestrator.sh \
@@ -465,9 +465,9 @@ GitHub App Webhook → Self-hosted Service → Prebuild Image → opencode run
 
 | Step | Description | Deliverable | Validation |
 |------|-------------|-------------|------------|
-| 1.1 | Audit prebuild repo state | Inventory of existing files in `intel-agency/workflow-orchestration-prebuild` | Document current structure |
+| 1.1 | Audit prebuild repo state | Inventory of existing files in `nam20485/workflow-orchestration-prebuild` | Document current structure |
 | 1.2 | Identify conflicts/overlaps | Map template files to prebuild repo destinations | Conflict resolution plan |
-| 1.3 | Verify image URL stability | Confirm `ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest` is correct | Test image pull |
+| 1.3 | Verify image URL stability | Confirm `ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest` is correct | Test image pull |
 | 1.4 | Audit secrets/variables | Verify prebuild repo has `VERSION_PREFIX` variable and required secrets | GHCR push capability confirmed |
 
 ### Phase 2: AGENTS.md Split
@@ -540,7 +540,7 @@ GitHub App Webhook → Self-hosted Service → Prebuild Image → opencode run
 
 | Requirement | Details |
 |-------------|---------|
-| Consumer image URL must not change | `ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest` |
+| Consumer image URL must not change | `ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest` |
 | All existing clones must continue to work | No breaking changes to image location |
 | Versioned tags for pinning | Prebuild repo must publish both `main-latest` and versioned tags (e.g., `main-1.0.123`) |
 
@@ -564,7 +564,7 @@ GitHub App Webhook → Self-hosted Service → Prebuild Image → opencode run
 
 | Requirement | Details |
 |-------------|---------|
-| Verify replacement logic | `create-repo-with-plan-docs.ps1` currently replaces `ai-new-workflow-app-template` |
+| Verify replacement logic | `create-repo-with-plan-docs.ps1` currently replaces `gap-miner-v2-delta48` |
 | Prebuild image URL unaffected | Consumer `devcontainer.json` references `workflow-orchestration-prebuild` — should be unaffected |
 | Test placeholder replacement | Create test clone and verify all placeholders resolved correctly |
 
@@ -650,7 +650,7 @@ GitHub App Webhook → Self-hosted Service → Prebuild Image → opencode run
 
 F1 is **DONE** when:
 
-1. ✅ All files listed in § 4.1 have been moved to `intel-agency/workflow-orchestration-prebuild`
+1. ✅ All files listed in § 4.1 have been moved to `nam20485/workflow-orchestration-prebuild`
 2. ✅ All files listed in § 4.2 remain in the template repo
 3. ✅ AGENTS.md has been split per § 4.3
 4. ✅ Prebuild repo CI publishes images to GHCR at the expected URL
@@ -685,8 +685,8 @@ F1 is **DONE** when:
 | Resource | URL |
 |----------|-----|
 | devcontainers/ci Quick Start | https://github.com/devcontainers/ci#quick-start |
-| Prebuild Repo | https://github.com/intel-agency/workflow-orchestration-prebuild |
-| Template Repo | https://github.com/intel-agency/ai-new-workflow-app-template |
+| Prebuild Repo | https://github.com/nam20485/workflow-orchestration-prebuild |
+| Template Repo | https://github.com/nam20485/gap-miner-v2-delta48 |
 
 ---
 
@@ -735,4 +735,4 @@ template-repo/
 └── (application code)
 ```
 
-Everything else lives in `intel-agency/workflow-orchestration-prebuild`.
+Everything else lives in `nam20485/workflow-orchestration-prebuild`.

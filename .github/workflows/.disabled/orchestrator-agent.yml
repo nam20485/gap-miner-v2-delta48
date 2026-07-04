@@ -113,7 +113,7 @@ jobs:
 
       - name: Verify devcontainer image exists
         run: |
-          IMAGE="ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest"
+          IMAGE="ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest"
           if ! docker manifest inspect "$IMAGE" > /dev/null 2>&1; then
             echo "::error::Devcontainer image not found: $IMAGE"
             echo "::error::Run the 'Publish Docker' and 'Pre-build dev container image' workflows first."
@@ -121,7 +121,7 @@ jobs:
           fi
 
       - name: Pull devcontainer image
-        run: docker pull "ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest"
+        run: docker pull "ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest"
         # Docker automatically skips pulling layers that are already cached on
         # the runner. The image tag is stable (main-latest), so repeated runs
         # on warm runners benefit from the layer cache without extra config.

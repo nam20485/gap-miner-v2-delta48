@@ -3,8 +3,8 @@
 > **Date:** 2026-03-26  
 > **Scope:** Two non-idle orchestrator failures called out as exceptions in `docs/idle-timeout-forensic-report.md`  
 > **Affected targets:**
-> - `intel-agency/ai-new-workflow-app-template` run `23415797162` (2026-03-23)
-> - `intel-agency/workflow-orchestration-queue-quebec50` run `23530174003` (2026-03-25)  
+> - `nam20485/gap-miner-v2-delta48` run `23415797162` (2026-03-23)
+> - `nam20485/workflow-orchestration-queue-quebec50` run `23530174003` (2026-03-25)  
 > **Pattern confirmed:** Yes — both are **configuration / invariant mismatches**, not runtime orchestration stalls
 
 ---
@@ -26,8 +26,8 @@ So the two incidents are unrelated to the idle-timeout pattern, but they are rel
 
 | # | Repo | Run ID | Date (UTC) | Failure Class | Immediate Error | Why It Looked Illogical |
 |---|------|--------|------------|---------------|-----------------|-------------------------|
-| 1 | `intel-agency/ai-new-workflow-app-template` | `23415797162` | 2026-03-23 00:07 | Token validation failure | `GH_ORCHESTRATION_AGENT_TOKEN is missing required scopes: read:org` | Same-repo run rejected a narrower-but-usable token path instead of falling back to `GITHUB_TOKEN` |
-| 2 | `intel-agency/workflow-orchestration-queue-quebec50` | `23530174003` | 2026-03-25 07:39 | Image bootstrap mismatch | `Devcontainer image not found: ghcr.io/intel-agency/workflow-orchestration-queue-quebec50/devcontainer:main-latest` | Repo config pointed to shared prebuild image, but workflow checked a nonexistent per-repo image and suggested nonexistent workflows |
+| 1 | `nam20485/gap-miner-v2-delta48` | `23415797162` | 2026-03-23 00:07 | Token validation failure | `GH_ORCHESTRATION_AGENT_TOKEN is missing required scopes: read:org` | Same-repo run rejected a narrower-but-usable token path instead of falling back to `GITHUB_TOKEN` |
+| 2 | `nam20485/workflow-orchestration-queue-quebec50` | `23530174003` | 2026-03-25 07:39 | Image bootstrap mismatch | `Devcontainer image not found: ghcr.io/nam20485/workflow-orchestration-queue-quebec50/devcontainer:main-latest` | Repo config pointed to shared prebuild image, but workflow checked a nonexistent per-repo image and suggested nonexistent workflows |
 
 ### 2.2 Template Repo Token Failure — Observed Evidence
 
@@ -60,8 +60,8 @@ That behavior is explicit in the current script logic in `run_opencode_prompt.sh
 From run `23530174003`:
 
 ```text
-IMAGE="ghcr.io/intel-agency/workflow-orchestration-queue-quebec50/devcontainer:main-latest"
-##[error]Devcontainer image not found: ghcr.io/intel-agency/workflow-orchestration-queue-quebec50/devcontainer:main-latest
+IMAGE="ghcr.io/nam20485/workflow-orchestration-queue-quebec50/devcontainer:main-latest"
+##[error]Devcontainer image not found: ghcr.io/nam20485/workflow-orchestration-queue-quebec50/devcontainer:main-latest
 ##[error]Run the 'Publish Docker' and 'Pre-build dev container image' workflows first.
 ##[error]Process completed with exit code 1.
 ```
@@ -85,7 +85,7 @@ From Quebec50’s `.devcontainer/devcontainer.json`:
 
 ```json
 {
-  "image": "ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest"
+  "image": "ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest"
 }
 ```
 
@@ -170,7 +170,7 @@ This makes the PAT behave as a hard gate instead of an enhancement.
 
 The Quebec50 orchestrator workflow failed because it checked for a repo-specific image:
 
-`ghcr.io/intel-agency/workflow-orchestration-queue-quebec50/devcontainer:main-latest`
+`ghcr.io/nam20485/workflow-orchestration-queue-quebec50/devcontainer:main-latest`
 
 That image did not exist.
 
@@ -180,7 +180,7 @@ The failure chain was:
 
 1. Quebec50 was generated from a template state where orchestration image handling was mid-migration.
 2. Its `.devcontainer/devcontainer.json` already pointed to the shared prebuild image:
-   `ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest`
+   `ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest`
 3. But its historical `orchestrator-agent.yml` still verified and pulled the old per-repo image form:
    `ghcr.io/${github.repository}/devcontainer:main-latest`
 4. The repo had no `publish-docker.yml` or `prebuild-devcontainer.yml` workflows, so there was no local mechanism to create that per-repo image.
@@ -334,7 +334,7 @@ Required: repo workflow project read:org  |  Granted: project, read:packages, re
 #### Quebec50 image failure
 
 ```text
-Devcontainer image not found: ghcr.io/intel-agency/workflow-orchestration-queue-quebec50/devcontainer:main-latest
+Devcontainer image not found: ghcr.io/nam20485/workflow-orchestration-queue-quebec50/devcontainer:main-latest
 Run the 'Publish Docker' and 'Pre-build dev container image' workflows first.
 ```
 
@@ -345,7 +345,7 @@ Run the 'Publish Docker' and 'Pre-build dev container image' workflows first.
 ```json
 // .devcontainer/devcontainer.json
 {
-  "image": "ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest"
+  "image": "ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest"
 }
 ```
 
@@ -358,8 +358,8 @@ These cannot both be the correct invariant for the same repo.
 
 ### 6.3 Sources Consulted
 
-- Workflow run `23415797162` logs (`intel-agency/ai-new-workflow-app-template`)
-- Workflow run `23530174003` logs (`intel-agency/workflow-orchestration-queue-quebec50`)
+- Workflow run `23415797162` logs (`nam20485/gap-miner-v2-delta48`)
+- Workflow run `23530174003` logs (`nam20485/workflow-orchestration-queue-quebec50`)
 - `run_opencode_prompt.sh`
 - Historical template workflow at commit `c0f799e0a3d271479e62ff4df5bff305598e1361`:
   `.github/workflows/orchestrator-agent.yml`

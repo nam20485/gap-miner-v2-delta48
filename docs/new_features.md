@@ -2,7 +2,7 @@
 
 To plan and implment...
 
-## **F1:** Move all server/opencode/orchestraton-related/non-template clone-related code to the `intel-agency/workflow-orchestration-prebuild` container
+## **F1:** Move all server/opencode/orchestraton-related/non-template clone-related code to the `nam20485/workflow-orchestration-prebuild` container
 
 The child tremplates can just reference and use the prebuild package without worrying about the server related code. This will also make the codebase cleaner and more modular, separating the disparate converns cleanly and totally. All the funciotrnality and file3s wil be moved into the lowedt layre, the Docker container so that higher layers have access, i.e. the devonctainer layer on top. Then functionality that used to use all the code in the existing template repo can just exec into the devcontainer and use the prebuild container to run the orchestration process, without needing to worry about the underlying code or dependencies. This will also make it easier to maintain and update the orchestration code, as it will be centralized in one place rather than being scattered across multiple templates.
 
@@ -41,7 +41,7 @@ Both at once:
 
 #### Architecture
 
-The prebuild repo (`intel-agency/workflow-orchestration-prebuild`) already exists and the consumer `devcontainer.json` already references its image (`ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest`). The work is to move the remaining build-side artifacts out of this template repo and into that prebuild repo so the template is purely application-level content.
+The prebuild repo (`nam20485/workflow-orchestration-prebuild`) already exists and the consumer `devcontainer.json` already references its image (`ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest`). The work is to move the remaining build-side artifacts out of this template repo and into that prebuild repo so the template is purely application-level content.
 
 #### Files to Move → Prebuild Repo
 
@@ -74,7 +74,7 @@ The prebuild repo (`intel-agency/workflow-orchestration-prebuild`) already exist
 1. **Clone prebuild repo**, verify its current state (it may already have a Dockerfile and publish workflow).
 2. **Copy build artifacts** from this template into the prebuild repo (files listed above).
 3. **Update prebuild workflows** — ensure `publish-docker.yml` and `prebuild-devcontainer.yml` build and push correctly from the new repo context.
-4. **Run prebuild CI** — push to prebuild repo, verify the image publishes to GHCR at the same tag path (`ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest`).
+4. **Run prebuild CI** — push to prebuild repo, verify the image publishes to GHCR at the same tag path (`ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest`).
 5. **Delete moved files** from this template repo.
 6. **Update `validate.yml`** — remove or update the `test-devcontainer-build` job (already disabled).
 7. **Update AGENTS.md** — remove references to `.github/.devcontainer/Dockerfile` and publish/prebuild workflows.
@@ -85,11 +85,11 @@ The prebuild repo (`intel-agency/workflow-orchestration-prebuild`) already exist
 - Consumer `devcontainer.json` image URL must not change (or all existing clones break).
 - `start-opencode-server.sh` must be available inside the prebuild container at a known path.
 - The prebuild repo must publish both `main-latest` (stable) and versioned tags for pinning.
-- Template placeholder replacement in `create-repo-with-plan-docs.ps1` must be verified — it currently replaces `ai-new-workflow-app-template` in file contents; the consumer `devcontainer.json` image URL references `workflow-orchestration-prebuild` so it should be unaffected, but this needs confirmation.
+- Template placeholder replacement in `create-repo-with-plan-docs.ps1` must be verified — it currently replaces `gap-miner-v2-delta48` in file contents; the consumer `devcontainer.json` image URL references `workflow-orchestration-prebuild` so it should be unaffected, but this needs confirmation.
 
 #### Immediate Issues
 
-1. **Unknown state of prebuild repo** — need to audit `intel-agency/workflow-orchestration-prebuild` to see what's already there and what overlaps.
+1. **Unknown state of prebuild repo** — need to audit `nam20485/workflow-orchestration-prebuild` to see what's already there and what overlaps.
 2. **`start-opencode-server.sh` path dependency** — the consumer `devcontainer.json` `postStartCommand` references `bash ./scripts/start-opencode-server.sh` relative to the workspace root. If this script moves into the Docker image, the path changes. Options: (a) bake it into the image and change `postStartCommand` to call the absolute path, or (b) keep a thin wrapper in the template that delegates to the image's copy.
 3. **`test-image-tag-logic.sh`** — test file that validates image tag resolution; needs to move with the publish workflow or be duplicated.
 4. **Secret/variable alignment** — prebuild repo needs `VERSION_PREFIX` variable and any required secrets for GHCR push.
@@ -214,7 +214,7 @@ Replace direct `github.event` references with a platform-agnostic envelope:
   "event_type": "issue_labeled",
   "timestamp": "2026-03-25T12:00:00Z",
   "actor": { "id": "nam20485", "type": "user" },
-  "repository": { "owner": "intel-agency", "name": "my-app", "url": "..." },
+  "repository": { "owner": "nam20485", "name": "my-app", "url": "..." },
   "ref": { "branch": "main", "sha": "abc123" },
   "entity": {
     "type": "issue",

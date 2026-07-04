@@ -23,13 +23,13 @@
     "changed_files": 3,
     "additions": 85,
     "deletions": 0,
-    "html_url": "https://github.com/intel-agency/workflow-orchestration/pull/1",
-    "diff_url": "https://github.com/intel-agency/workflow-orchestration/pull/1.diff"
+    "html_url": "https://github.com/nam20485/workflow-orchestration/pull/1",
+    "diff_url": "https://github.com/nam20485/workflow-orchestration/pull/1.diff"
   },
   "repository": {
-    "full_name": "intel-agency/workflow-orchestration",
+    "full_name": "nam20485/workflow-orchestration",
     "name": "workflow-orchestration",
-    "owner": { "login": "intel-agency" }
+    "owner": { "login": "nam20485" }
   },
   "sender": { "login": "nam20485" }
 }

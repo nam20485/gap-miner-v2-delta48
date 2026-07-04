@@ -14,7 +14,7 @@
     automated project creation unreliable.
 
 .PARAMETER Owner
-    GitHub organization or user that owns the repository (e.g. "intel-agency").
+    GitHub organization or user that owns the repository (e.g. "nam20485").
 
 .PARAMETER Repo
     Repository name (e.g. "my-app-bravo84"). Do NOT include the owner prefix.
@@ -23,10 +23,10 @@
     Show what would be created without making any changes.
 
 .EXAMPLE
-    ./scripts/create-project.ps1 -Owner intel-agency -Repo my-app-bravo84
+    ./scripts/create-project.ps1 -Owner nam20485 -Repo my-app-bravo84
 
 .EXAMPLE
-    ./scripts/create-project.ps1 -Owner intel-agency -Repo my-app-bravo84 -DryRun
+    ./scripts/create-project.ps1 -Owner nam20485 -Repo my-app-bravo84 -DryRun
 
 .NOTES
     Requires: GitHub CLI (gh) authenticated with `project` and `read:project` scopes.

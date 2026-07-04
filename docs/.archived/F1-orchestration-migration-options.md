@@ -82,7 +82,7 @@ steps:
   - uses: actions/checkout@...  # this repo (application code)
   - uses: actions/checkout@...  # prebuild repo → .orchestration/
     with:
-      repository: intel-agency/workflow-orchestration-prebuild
+      repository: nam20485/workflow-orchestration-prebuild
       path: .orchestration
   - run: |
       # Overlay orchestration config into workspace
@@ -113,7 +113,7 @@ steps:
   - checkout  # this repo (plan_docs, AGENTS.local.md, devcontainer.json)
   - checkout  # prebuild repo → .orchestration/ (agents, commands, prompt, opencode.json)
     with:
-      repository: intel-agency/workflow-orchestration-prebuild
+      repository: nam20485/workflow-orchestration-prebuild
       path: .orchestration
   - run: |
       # Overlay config from orchestration repo into workspace
@@ -206,4 +206,4 @@ template-repo/
 └── (application code)
 ```
 
-Everything else lives in `intel-agency/workflow-orchestration-prebuild`.
+Everything else lives in `nam20485/workflow-orchestration-prebuild`.

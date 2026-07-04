@@ -1,6 +1,6 @@
 # Subagent Activity Line Prefix Plan
 
-**Source:** Run 62401037419 — `intel-agency/workflow-orchestration-queue-foxtrot86`
+**Source:** Run 62401037419 — `nam20485/workflow-orchestration-queue-foxtrot86`
 **Objective:** Add an identifiable prefix to subagent activity lines so they don't blend with `[watchdog]` and `Thinking:` output.
 
 ---

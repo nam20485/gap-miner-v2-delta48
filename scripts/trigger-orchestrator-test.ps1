@@ -10,7 +10,7 @@
 
 .PARAMETER Repo
     The owner/name of the target GitHub repository.
-    Defaults to 'intel-agency/workflow-orchestration-queue-uniform39'.
+    Defaults to 'nam20485/workflow-orchestration-queue-uniform39'.
 
 .EXAMPLE
     ./trigger-orchestrator-test.ps1
@@ -27,7 +27,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Position = 0)]
-    [string]$Repo = 'intel-agency/workflow-orchestration-queue-uniform39'
+    [string]$Repo = 'nam20485/workflow-orchestration-queue-uniform39'
 )
 
 $ErrorActionPreference = 'Stop'

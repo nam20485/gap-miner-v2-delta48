@@ -9,13 +9,13 @@
 
 ## 1. Vision & Goals
 
-Move **all** orchestration logic — opencode server, orchestrator agent, prompt assembly, CLI wrappers, MCP server infrastructure, and related workflows — out of this template repo and into the `intel-agency/workflow-orchestration-prebuild` container. The template repo becomes a **thin application-level scaffold** that references the prebuild container for all orchestration functionality.
+Move **all** orchestration logic — opencode server, orchestrator agent, prompt assembly, CLI wrappers, MCP server infrastructure, and related workflows — out of this template repo and into the `nam20485/workflow-orchestration-prebuild` container. The template repo becomes a **thin application-level scaffold** that references the prebuild container for all orchestration functionality.
 
 ### End-State Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  Prebuild Container (intel-agency/workflow-orchestration-prebuild) │
+│  Prebuild Container (nam20485/workflow-orchestration-prebuild) │
 │                                                                   │
 │  Baked into Docker image:                                         │
 │    - opencode CLI, MCP server binaries, .NET SDK, Bun, uv        │
@@ -68,8 +68,8 @@ Use the [`devcontainers/ci`](https://github.com/devcontainers/ci) GitHub Action 
 - name: Run orchestration in devcontainer
   uses: devcontainers/ci@v0.3
   with:
-    imageName: ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer
-    cacheFrom: ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer
+    imageName: ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer
+    cacheFrom: ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer
     push: never
     runCmd: |
       # Inside the devcontainer — full orchestration runtime available
@@ -177,7 +177,7 @@ These change more frequently (agent definitions, prompt tuning) and are overlaid
 
 ### Phase 1: Audit & Prepare Prebuild Repo
 
-1. **Audit `intel-agency/workflow-orchestration-prebuild`** — inventory what's already there (Dockerfile, workflows, scripts). Identify overlaps and gaps.
+1. **Audit `nam20485/workflow-orchestration-prebuild`** — inventory what's already there (Dockerfile, workflows, scripts). Identify overlaps and gaps.
 2. **Define the `/opt/orchestration/` directory structure** inside the Docker image for baked-in runtime files.
 3. **Plan the prebuild repo directory layout** for config files that get checked out at runtime.
 
@@ -193,7 +193,7 @@ These change more frequently (agent definitions, prompt tuning) and are overlaid
 8. **Add `COPY` directives** to the prebuild Dockerfile for runtime scripts → `/opt/orchestration/scripts/`.
 9. **Update `start-opencode-server.sh`** path references — the consumer `devcontainer.json` `postStartCommand` must reference the new absolute path (`/opt/orchestration/scripts/start-opencode-server.sh`) or use a symlink.
 10. **Move `run_opencode_prompt.sh`** into the image.
-11. **Rebuild and publish** the prebuild image. Verify tag path unchanged: `ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest`.
+11. **Rebuild and publish** the prebuild image. Verify tag path unchanged: `ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest`.
 
 ### Phase 4: Move Config Files to Prebuild Repo
 
@@ -220,7 +220,7 @@ These change more frequently (agent definitions, prompt tuning) and are overlaid
 
 ### Phase 7: Update Template Creation Scripts
 
-21. **Update `create-repo-with-plan-docs.ps1`** in `workflow-launch2` — verify placeholder replacement still works. The consumer `devcontainer.json` image URL references `workflow-orchestration-prebuild` (not `ai-new-workflow-app-template`), so it should be unaffected, but confirm.
+21. **Update `create-repo-with-plan-docs.ps1`** in `workflow-launch2` — verify placeholder replacement still works. The consumer `devcontainer.json` image URL references `workflow-orchestration-prebuild` (not `gap-miner-v2-delta48`), so it should be unaffected, but confirm.
 22. **Update placeholder list** — if any new files (e.g., `AGENTS.local.md`) contain template placeholders, ensure the creation script replaces them.
 
 ### Phase 8: Validate End-to-End
@@ -240,7 +240,7 @@ These change more frequently (agent definitions, prompt tuning) and are overlaid
 
 | Risk | Impact | Mitigation |
 |-|-|-|
-| **Consumer `devcontainer.json` image URL changes** | All existing clones break | Keep image URL unchanged: `ghcr.io/intel-agency/workflow-orchestration-prebuild/devcontainer:main-latest` |
+| **Consumer `devcontainer.json` image URL changes** | All existing clones break | Keep image URL unchanged: `ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest` |
 | **`start-opencode-server.sh` path dependency** | Devcontainer startup fails | Use absolute path `/opt/orchestration/scripts/start-opencode-server.sh` in `postStartCommand`, or keep a thin wrapper in template that calls the image path |
 | **`setsid` behavior in `devcontainers/ci` `runCmd`** | opencode serve daemon may die when `runCmd` completes | Verify `setsid` still works in `devcontainers/ci` exec context (different from `devcontainer exec`). If not, use `runCmd` for one-shot prompt execution instead of daemon mode |
 | **opencode expects `.opencode/` in workspace root** | Agent definitions not found | Overlay via `cp -r` or symlink from checkout path into workspace root before running opencode |
@@ -273,7 +273,7 @@ The known issue with `devcontainer exec` killing `nohup` background processes (r
 
 ### Template Placeholder Replacement
 
-The `create-repo-with-plan-docs.ps1` script replaces `ai-new-workflow-app-template` → new repo name and `intel-agency` → new owner in file contents. After the migration:
+The `create-repo-with-plan-docs.ps1` script replaces `gap-miner-v2-delta48` → new repo name and `nam20485` → new owner in file contents. After the migration:
 
 - The consumer `devcontainer.json` references `workflow-orchestration-prebuild` (not the template name) — should be unaffected
 - The new `AGENTS.local.md` will contain template placeholders — must be included in the replacement scope
