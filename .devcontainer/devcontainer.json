@@ -1,5 +1,5 @@
 {
-  "name": "gap-miner-v2-delta48",
+  "name": "gap-miner-v2-delta48-devcontainer",
   "image": "ghcr.io/nam20485/workflow-orchestration-prebuild/devcontainer:main-latest",
   "containerEnv": {
     "DOTNET_ROOT": "/usr/share/dotnet"
